@@ -3,7 +3,7 @@ import CoreLocation
 
 class WeatherService: NSObject, ObservableObject {
     @Published var weatherData: WeatherData?
-    private let apiKey =   Bundle.main.object(forInfoDictionaryKey: "API_KEY")
+    private let apiKey = Bundle.main.object(forInfoDictionaryKey: "API_KEY") as? String
     private let baseURL = "https://api.openweathermap.org/data/2.5/weather"
     private var locationManager: CLLocationManager!
     
@@ -16,11 +16,19 @@ class WeatherService: NSObject, ObservableObject {
     }
     
     func fetchWeather(for city: String) {
+        guard let apiKey = apiKey else {
+            print("API key not found")
+            return
+        }
         let urlString = "\(baseURL)?q=\(city)&appid=\(apiKey)&units=metric"
         fetchWeather(from: urlString)
     }
     
     func fetchWeather(latitude: Double, longitude: Double) {
+        guard let apiKey = apiKey else {
+            print("API key not found")
+            return
+        }
         let urlString = "\(baseURL)?lat=\(latitude)&lon=\(longitude)&appid=\(apiKey)&units=metric"
         fetchWeather(from: urlString)
     }
