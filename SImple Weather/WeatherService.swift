@@ -3,7 +3,7 @@ import CoreLocation
 
 class WeatherService: NSObject, ObservableObject {
     @Published var weatherData: WeatherData?
-    private let apiKey = ""
+    private let apiKey =   Bundle.main.object(forInfoDictionaryKey: "API_KEY")
     private let baseURL = "https://api.openweathermap.org/data/2.5/weather"
     private var locationManager: CLLocationManager!
     

@@ -48,6 +48,8 @@
 		501D116E2C26DE1200E950FB /* SImple_WeatherUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SImple_WeatherUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		506598FB2C26DFB800DE45F8 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		506598FD2C26DFD600DE45F8 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
+		506599002C26F78800DE45F8 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		506599012C26F92D00DE45F8 /* SImple-Weather-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SImple-Weather-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,8 @@
 		501D11502C26DE1000E950FB /* SImple Weather */ = {
 			isa = PBXGroup;
 			children = (
+				506599002C26F78800DE45F8 /* Config.xcconfig */,
+				506599012C26F92D00DE45F8 /* SImple-Weather-Info.plist */,
 				501D11512C26DE1000E950FB /* SImple_WeatherApp.swift */,
 				501D11532C26DE1000E950FB /* ContentView.swift */,
 				501D11552C26DE1200E950FB /* Assets.xcassets */,
@@ -305,6 +309,7 @@
 /* Begin XCBuildConfiguration section */
 		501D11702C26DE1200E950FB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 506599002C26F78800DE45F8 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -424,6 +429,7 @@
 		};
 		501D11732C26DE1200E950FB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 506599002C26F78800DE45F8 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -433,6 +439,7 @@
 				DEVELOPMENT_TEAM = F92MF54442;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SImple-Weather-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -462,6 +469,7 @@
 				DEVELOPMENT_TEAM = F92MF54442;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SImple-Weather-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -482,6 +490,7 @@
 		};
 		501D11762C26DE1200E950FB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 506599002C26F78800DE45F8 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -522,6 +531,7 @@
 		};
 		501D11792C26DE1200E950FB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 506599002C26F78800DE45F8 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
