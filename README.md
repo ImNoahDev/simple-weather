@@ -1,1 +1,2 @@
 # simple-weather
+This is a simple ios app that uses openweathermaps api to get weather info. It shows: Feels like, Wind, Pressure, Humidiy and cloud cover. It uses location data but also has a manual search. The backround image is pulled using satelite imagery from googles API.

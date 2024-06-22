@@ -1,7 +1,4 @@
 import SwiftUI
-import SwiftUI
-import SwiftUI
-
 struct ContentView: View {
     @StateObject private var weatherService = WeatherService()
     @State private var searchText = ""
@@ -85,18 +82,17 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-
 struct WeatherView: View {
     let weatherData: WeatherData
 
     var body: some View {
-        
         VStack {
             Text("Good morning, ")
                 .italic()
                 .padding(.top)
                 .fontWeight(.bold)
                 .font(.system(size: 28))
+            
             Text(weatherData.name)
                 .fontWeight(.bold)
                 .font(.system(size: 48))
@@ -107,9 +103,36 @@ struct WeatherView: View {
                 .padding(.top)
             
             HStack {
-                Image(systemName: "humidity")
+                Image(systemName: "thermometer")
+                    .foregroundColor(.red)
+                Text("Feels like: \(weatherData.main.feelsLike, specifier: "%.1f") °C")
+                    .font(.title2)
+                    .foregroundColor(.gray)
+            }
+            .padding(.top)
+            
+            HStack {
+                Image(systemName: "wind")
+                    .foregroundColor(.green)
+                Text("Wind: \(weatherData.wind.speed, specifier: "%.1f") m/s")
+                    .font(.title2)
+                    .foregroundColor(.gray)
+            }
+            .padding(.top)
+            
+            HStack {
+                Image(systemName: "gauge")
+                    .foregroundColor(.purple)
+                Text("Pressure: \(weatherData.main.pressure, specifier: "%.0f") hPa")
+                    .font(.title2)
+                    .foregroundColor(.gray)
+            }
+            .padding(.top)
+            
+            HStack {
+                Image(systemName: "drop.fill")
                     .foregroundColor(.blue)
-                Text("Humidity: \(weatherData.main.humidity, specifier: "%.0f")%") // Format humidity to one decimal place
+                Text("Humidity: \(weatherData.main.humidity, specifier: "%.0f")%")
                     .font(.title2)
                     .foregroundColor(.gray)
             }
@@ -130,7 +153,7 @@ struct WeatherView: View {
         .background(
             RoundedRectangle(cornerRadius: 20)
                 .fill(Color(.systemBackground))
-                .opacity(0.95) // Adjust opacity for better map visibility
+                .opacity(0.95)
                 .shadow(color: Color.black.opacity(0.4), radius: 10, x: 0, y: 5)
         )
         .padding()
@@ -149,6 +172,7 @@ struct WeatherView: View {
         }
     }
 }
+
 
 
     private func weatherIcon(for weather: String) -> String {
