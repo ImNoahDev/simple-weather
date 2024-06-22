@@ -50,6 +50,8 @@
 		506598FD2C26DFD600DE45F8 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		506599002C26F78800DE45F8 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		506599012C26F92D00DE45F8 /* SImple-Weather-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SImple-Weather-Info.plist"; sourceTree = SOURCE_ROOT; };
+		50B398B42C272CB6009CCB34 /* SImple-WeatherTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SImple-WeatherTests-Info.plist"; sourceTree = SOURCE_ROOT; };
+		50B398B52C272CBC009CCB34 /* SImple-WeatherUITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "SImple-WeatherUITests-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,8 +107,8 @@
 				501D11512C26DE1000E950FB /* SImple_WeatherApp.swift */,
 				501D11532C26DE1000E950FB /* ContentView.swift */,
 				501D11552C26DE1200E950FB /* Assets.xcassets */,
-				501D11572C26DE1200E950FB /* Preview Content */,
 				506598FB2C26DFB800DE45F8 /* WeatherData.swift */,
+				501D11572C26DE1200E950FB /* Preview Content */,
 				506598FD2C26DFD600DE45F8 /* WeatherService.swift */,
 			);
 			path = "SImple Weather";
@@ -123,6 +125,7 @@
 		501D11612C26DE1200E950FB /* SImple WeatherTests */ = {
 			isa = PBXGroup;
 			children = (
+				50B398B42C272CB6009CCB34 /* SImple-WeatherTests-Info.plist */,
 				501D11622C26DE1200E950FB /* SImple_WeatherTests.swift */,
 			);
 			path = "SImple WeatherTests";
@@ -131,6 +134,7 @@
 		501D116B2C26DE1200E950FB /* SImple WeatherUITests */ = {
 			isa = PBXGroup;
 			children = (
+				50B398B52C272CBC009CCB34 /* SImple-WeatherUITests-Info.plist */,
 				501D116C2C26DE1200E950FB /* SImple_WeatherUITests.swift */,
 				501D116E2C26DE1200E950FB /* SImple_WeatherUITestsLaunchTests.swift */,
 			);
@@ -502,6 +506,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F92MF54442;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SImple-WeatherTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Noah.SImple-WeatherTests";
@@ -522,6 +527,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F92MF54442;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SImple-WeatherTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Noah.SImple-WeatherTests";
@@ -542,6 +548,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F92MF54442;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SImple-WeatherUITests-Info.plist";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Noah.SImple-WeatherUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -560,6 +567,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F92MF54442;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SImple-WeatherUITests-Info.plist";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Noah.SImple-WeatherUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";

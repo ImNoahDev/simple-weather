@@ -1,19 +1,22 @@
-// WeatherData.swift
-
 import Foundation
 
 struct WeatherData: Codable {
-    let main: Weather
-    let weather: [WeatherDescription]
     let name: String
+    let main: Main
+    let weather: [Weather]
+    let coord: Coord
+    
+    struct Coord: Codable {
+        let lat: Double
+        let lon: Double
+    }
 }
 
-struct Weather: Codable {
+struct Main: Codable {
     let temp: Double
     let humidity: Double
 }
 
-struct WeatherDescription: Codable {
+struct Weather: Codable {
     let description: String
-    let id: Int
 }

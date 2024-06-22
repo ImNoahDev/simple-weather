@@ -1,22 +1,29 @@
 import SwiftUI
-import CoreLocation
+import SwiftUI
+import SwiftUI
 
 struct ContentView: View {
     @StateObject private var weatherService = WeatherService()
     @State private var searchText = ""
     @State private var showingAlert = false
     @State private var alertMessage = ""
-    
+
     var body: some View {
         NavigationView {
             ZStack {
+                // Background Map Image
                 if let weatherData = weatherService.weatherData {
-                    BackgroundView(weather: weatherData.weather.first?.description ?? "Clear")
+                    MapBackground(latitude: weatherData.coord.lat, longitude: weatherData.coord.lon)
+                        .edgesIgnoringSafeArea(.all)
+                        .scaledToFill()
                 } else {
                     Color.blue.edgesIgnoringSafeArea(.all)
                 }
-                
+
                 VStack {
+                    // Search Bar and UI Components
+                    Spacer() // Push content to the bottom
+
                     HStack {
                         TextField("Enter city name", text: $searchText, onCommit: {
                             weatherService.fetchWeather(for: searchText)
@@ -24,9 +31,10 @@ struct ContentView: View {
                         })
                         .padding()
                         .background(Color(.systemGray6))
-                        .cornerRadius(8)
+                        .cornerRadius(10) // Rounded corners
                         .padding(.horizontal)
-                        
+                        .frame(maxWidth: 330) // Limit width of search bar
+
                         Button(action: {
                             weatherService.fetchWeather(for: searchText)
                             hideKeyboard()
@@ -39,19 +47,20 @@ struct ContentView: View {
                         }
                         .padding(.trailing)
                     }
-                    .padding(.top)
-                    
+                    .padding()
+
                     if let weatherData = weatherService.weatherData {
                         WeatherView(weatherData: weatherData)
                             .transition(.slide)
+                            .padding()
                     } else {
                         ProgressView("Fetching Weather...")
                             .padding()
                     }
-                    
-                    Spacer()
                 }
-                .navigationBarTitle("Weather", displayMode: .inline)
+                .navigationBarHidden(true) // Hide navigation bar
+
+                // Alert for error message
                 .alert(isPresented: $showingAlert) {
                     Alert(title: Text("Error"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
                 }
@@ -64,7 +73,7 @@ struct ContentView: View {
             weatherService.stopLocationUpdates()
         }
     }
-    
+
     private func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
@@ -75,11 +84,13 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+
 struct WeatherView: View {
     let weatherData: WeatherData
-    
-    var body: some View {
 
+    var body: some View {
+        
         VStack {
             Text("Good morning, ")
                 .italic()
@@ -111,20 +122,20 @@ struct WeatherView: View {
                     .font(.title2)
                     .foregroundColor(.gray)
             }
-            .padding(.top)
-            
+            .padding()
+
             Spacer()
         }
-        .padding(20)
-        .padding()
+        .padding(40)
         .background(
             RoundedRectangle(cornerRadius: 20)
                 .fill(Color(.systemBackground))
-                .shadow(color: Color.black.opacity(0.1), radius: 10, x: 0, y: 5)
+                .opacity(0.95) // Adjust opacity for better map visibility
+                .shadow(color: Color.black.opacity(0.4), radius: 10, x: 0, y: 5)
         )
         .padding()
     }
-    
+
     private func weatherIcon(for weather: String) -> String {
         switch weather {
         case "Clear":
@@ -139,7 +150,7 @@ struct WeatherView: View {
     }
 }
 
-    
+
     private func weatherIcon(for weather: String) -> String {
         switch weather {
         case "Clear":
@@ -153,79 +164,36 @@ struct WeatherView: View {
         }
     }
 
-struct BackgroundView: View {
-    let weather: String
-    
-    var body: some View {
-        ZStack {
-            switch weather {
-            case "Clear":
-                SunnyView()
-            case "Clouds":
-                CloudyView()
-            case "Rain":
-                RainyView()
-            default:
-                Color.blue.edgesIgnoringSafeArea(.all)
-            }
-        }
-        .edgesIgnoringSafeArea(.all)
-    }
-}
+struct MapBackground: View {
+    let latitude: Double
+    let longitude: Double
+    let apiKey = ""
 
-struct SunnyView: View {
     var body: some View {
         ZStack {
-            Color.blue.edgesIgnoringSafeArea(.all)
-            TimelineView(.animation) { timeline in
-                Canvas { context, size in
-                    let sunPath = Path { path in
-                        path.addArc(center: CGPoint(x: size.width / 2, y: size.height / 4),
-                                    radius: 60,
-                                    startAngle: .degrees(0),
-                                    endAngle: .degrees(360),
-                                    clockwise: false)
-                    }
-                    context.fill(sunPath, with: .color(.yellow))
+            // Background map image
+            AsyncImage(url: URL(string: mapURL)) { phase in
+                switch phase {
+                case .success(let image):
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .edgesIgnoringSafeArea(.all)
+                case .failure:
+                    Color.blue
+                case .empty:
+                    ProgressView()
                 }
             }
+            .overlay(
+                Color.black.opacity(0.3)
+            )
+            .background(Color.blue)
         }
     }
-}
 
-struct CloudyView: View {
-    var body: some View {
-        ZStack {
-            Color.gray.edgesIgnoringSafeArea(.all)
-            TimelineView(.animation) { timeline in
-                Canvas { context, size in
-                    let cloudPath = Path { path in
-                        path.addRoundedRect(in: CGRect(x: size.width / 4, y: size.height / 4, width: size.width / 2, height: size.height / 4),
-                                            cornerSize: CGSize(width: 40, height: 40))
-                    }
-                    context.fill(cloudPath, with: .color(.white))
-                }
-            }
-        }
-    }
-}
-
-struct RainyView: View {
-    var body: some View {
-        ZStack {
-            Color.blue.edgesIgnoringSafeArea(.all)
-            TimelineView(.animation) { timeline in
-                Canvas { context, size in
-                    let raindropPath = Path { path in
-                        for _ in 0..<10 {
-                            let x = CGFloat.random(in: 0..<size.width)
-                            let y = CGFloat.random(in: 0..<size.height)
-                            path.addEllipse(in: CGRect(x: x, y: y, width: 5, height: 10))
-                        }
-                    }
-                    context.fill(raindropPath, with: .color(.white))
-                }
-            }
-        }
+    private var mapURL: String {
+        return "https://maps.googleapis.com/maps/api/staticmap?center=\(latitude),\(longitude)&zoom=12&size=400x400&scale=2&maptype=satellite&markers=color:red%7C\(latitude),\(longitude)&key=\(apiKey)"
     }
 }
